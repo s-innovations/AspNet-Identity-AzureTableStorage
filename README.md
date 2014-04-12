@@ -7,7 +7,10 @@ AspNet-Identity-AzureTableStorage
 A implementation for AspNet Identity that uses Azure Table Storage. Its a test case for my Table Storage Repository Library
 
 
-The project is a test project for a library I wrote. Its 4 days of work and properly have some bugs. But the idea was to create a abstraction layer for table storage that would make it easy to use table storage and this project was then the test case to find out if it worked or not.
+The project is a test project for a library I wrote. https://github.com/s-innovations/azure-table-storage-repository-pattern
+
+
+The library was 4 days of work and it properly have some bugs. But the idea was to create a abstraction layer for table storage that would make it easy to use table storage and this project was then the test case to find out if it worked or not. It took around 2 hours setting up a AspNet UserStore implementation backed with Azure Tables as the backend.
 
 ```
 
