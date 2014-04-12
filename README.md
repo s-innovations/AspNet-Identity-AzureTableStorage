@@ -37,8 +37,7 @@ The library was 4 days of work and it properly have some bugs. But the idea was 
                 .ToTable("AspNetUsers");
 
             modelBuilder.Entity<TRole>()
-                .HasKeys(r=>r.Id,r=>r.Name)                
-                //RowKey of TUserRole is RoleID, Consider if its better to have one partition per role.       
+                .HasKeys(r=>r.Id,r=>r.Name)  
                 .ToTable("AspNetRoles");
 
             modelBuilder.Entity<TUserLogin>()
