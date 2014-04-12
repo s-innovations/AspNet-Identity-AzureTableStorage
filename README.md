@@ -9,7 +9,8 @@ A implementation for AspNet Identity that uses Azure Table Storage. Its a test c
 
 The project is a test project for a library I wrote. Its 4 days of work and properly have some bugs. But the idea was to create a abstraction layer for table storage that would make it easy to use table storage and this project was then the test case to find out if it worked or not.
 
-´´´
+```
+
    public class IdentityTableContext<TUser, TRole, TKey, TUserLogin, TUserClaim> : TableStorageContext
         where TUser : IdentityUser<TKey, TUserLogin,TRole, TUserClaim>
         where TRole : IdentityRole<TKey>
@@ -58,4 +59,4 @@ The project is a test project for a library I wrote. Its 4 days of work and prop
         public virtual ITableRepository<TUserClaim> Claims { get; set; }
     }
     
-´´´
+```
