@@ -11,7 +11,7 @@ using Microsoft.WindowsAzure.Storage.Table;
 namespace SInnovations.Identity.AzureTableStorage
 {
 
-    public class UserStore<TUser> : UserStore<TUser, string, IdentityRole, IdentityUserLogin, IdentityUserClaim>, IDisposable where TUser : IdentityUser
+    public class UserStore<TUser> : UserStore<TUser, string, IdentityRole, IdentityUserLogin, IdentityUserClaim>, IUserStore<TUser>, IDisposable where TUser : IdentityUser
     {
         // Methods
 
