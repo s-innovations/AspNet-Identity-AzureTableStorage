@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.WindowsAzure.Storage;
 using SInnovations.Azure.TableStorageRepository;
+using SInnovations.Azure.TableStorageRepository.TableRepositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
