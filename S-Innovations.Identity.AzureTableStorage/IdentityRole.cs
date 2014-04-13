@@ -19,6 +19,7 @@ namespace SInnovations.Identity.AzureTableStorage
         // Properties
         public TKey Id { get; set; }
         public string Name { get; set; }
+        public TKey UserId { get; set; }
       //  public virtual ICollection<TUserRole> Users { get; private set; }
     }
 

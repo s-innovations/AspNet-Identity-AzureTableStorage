@@ -55,7 +55,7 @@ namespace SInnovations.Identity.AzureTableStorage
     }
 
 
-    public class IdentityTableContext<TUser> : IdentityTableContext<TUser,IdentityRole,string,IdentityUserLogin,IdentityUserClaim>
+    public class IdentityTableContext<TUser> : IdentityTableContext<TUser, string, IdentityRole, IdentityUserLogin, IdentityUserClaim>
         where TUser : IdentityUser
     {
         public IdentityTableContext(CloudStorageAccount account ) : base(account)
@@ -64,11 +64,10 @@ namespace SInnovations.Identity.AzureTableStorage
         }
     }
 
-    public class IdentityTableContext<TUser, TRole, TKey, TUserLogin, TUserClaim> : TableStorageContext
-        where TUser : IdentityUser<TKey, TUserLogin,TRole, TUserClaim>
-        where TRole : IdentityRole<TKey>
-        where TUserLogin : IdentityUserLogin<TKey>
-       // where TUserRole : IdentityUserRole<TKey>, new()
+    public class IdentityTableContext<TUser, TKey, TUserRole, TUserLogin, TUserClaim> : TableStorageContext
+        where TUser : IdentityUser<TKey, TUserLogin, TUserRole, TUserClaim>
+        where TUserRole : IdentityRole<TKey>, new()
+        where TUserLogin : IdentityUserLogin<TKey>, new()
         where TUserClaim : IdentityUserClaim<TKey>,new()
     {
 
@@ -84,17 +83,13 @@ namespace SInnovations.Identity.AzureTableStorage
                 .WithIndex(u => u.UserName)
                 .WithIndex(u=>u.Email)
                 .WithCollectionOf<TUserClaim>(u=>u.Claims,(source, user) => (from claim in source where claim.PartitionKey == user.Id.ToString() select claim))
+                .WithCollectionOf<TUserLogin>(u=>u.Logins,(source,user) => (from login in source where login.PartitionKey==user.Id.ToString() select login))
+                .WithCollectionOf<TUserRole>(u => u.Roles,(source,user) => (from role in source where role.PartitionKey== user.Id.ToString() select role))
                 .ToTable("AspNetUsers");
 
-            modelBuilder.Entity<TRole>()
-                .HasKeys(r=>r.Id,r=>r.Name)                
-                //RowKey of TUserRole is RoleID, Consider if its better to have one partition per role.
-         //       .WithCollectionOf(r=>r.Users, (source,role) => from ent in source where ent.RowKey == role.Id.ToString() select ent)
+            modelBuilder.Entity<TUserRole>()
+                .HasKeys(r=>r.UserId,r=>r.Name)                
                 .ToTable("AspNetRoles");
-
-        //    modelBuilder.Entity<TUserRole>()
-        //        .HasKeys((ur) => ur.UserId.ToString(),(ur) => ur.RoleId.ToString())
-        //        .ToTable("AspNetUserRoles");
 
             modelBuilder.Entity<TUserLogin>()
                 .HasKeys( (ul) => ul.UserId, 
@@ -108,12 +103,11 @@ namespace SInnovations.Identity.AzureTableStorage
                 .HasKeys(c=>c.UserId,c=>c.Id)
                 .ToTable("AspNetUserClaims");
 
-
             base.OnModelCreating(modelBuilder);
         }
 
         public virtual ITableRepository<TUser> Users { get; set; }
-        public virtual ITableRepository<TRole> Roles { get; set; }
+        public virtual ITableRepository<TUserRole> Roles { get; set; }
         public virtual ITableRepository<TUserLogin> Logins { get; set; }
         public virtual ITableRepository<TUserClaim> Claims { get; set; }
     }

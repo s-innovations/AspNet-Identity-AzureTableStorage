@@ -13,7 +13,7 @@ namespace SInnovations.Identity.AzureTableStorage
 
 
 
-    public class UserStore<TUser, TRole, TKey, TUserLogin, TUserClaim> : 
+    public class UserStore<TUser, TKey,TRole, TUserLogin, TUserClaim> : 
         IUserLoginStore<TUser, TKey>, 
         IUserClaimStore<TUser, TKey>, 
         IUserRoleStore<TUser, TKey>, 
@@ -26,15 +26,15 @@ namespace SInnovations.Identity.AzureTableStorage
         IUserStore<TUser, TKey>, 
         IDisposable
         where TUser : IdentityUser<TKey, TUserLogin, TRole, TUserClaim>
-        where TRole : IdentityRole<TKey>
+        where TRole : IdentityRole<TKey>,new()
         where TKey : IEquatable<TKey>
         where TUserLogin : IdentityUserLogin<TKey>, new()
      //   where TUserRole : IdentityUserRole<TKey>, new()
         where TUserClaim : IdentityUserClaim<TKey>, new()
     {
-        private IdentityTableContext<TUser, TRole, TKey, TUserLogin,  TUserClaim> _context;
+        private IdentityTableContext<TUser, TKey, TRole, TUserLogin, TUserClaim> _context;
         private bool _disposed;
-        public UserStore(IdentityTableContext<TUser, TRole, TKey, TUserLogin, TUserClaim> tableContext)
+        public UserStore(IdentityTableContext<TUser, TKey,TRole, TUserLogin, TUserClaim> tableContext)
         {
             _context = tableContext;
         }
