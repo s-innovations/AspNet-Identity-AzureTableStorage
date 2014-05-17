@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SInnovations.Identity.AzureTableStorage
 {
-    public class IdentityUserRole<TKey> : TableEntity
+    public class IdentityUserRole<TKey> 
     {
 
         // Properties

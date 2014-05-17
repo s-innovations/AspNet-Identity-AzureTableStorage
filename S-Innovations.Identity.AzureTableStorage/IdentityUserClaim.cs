@@ -6,13 +6,13 @@ using System.Text;
 
 namespace SInnovations.Identity.AzureTableStorage
 {
-    public class IdentityUserClaim<TKey> : TableEntity
+    public class IdentityUserClaim<TKey> 
     {
       
         // Properties
         public virtual string ClaimType { get; set; }
         public virtual string ClaimValue { get; set; }
-        public virtual int Id { get; set; }
+       // public virtual int Id { get; set; }
         public virtual TKey UserId { get; set; }
     }
 

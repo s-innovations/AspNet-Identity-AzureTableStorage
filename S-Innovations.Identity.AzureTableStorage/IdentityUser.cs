@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SInnovations.Identity.AzureTableStorage
 {
-    public class IdentityUser<TKey, TLogin, TRole, TClaim> : TableEntity, IUser<TKey>
+    public class IdentityUser<TKey, TLogin, TRole, TClaim> : IUser<TKey>
         where TLogin : IdentityUserLogin<TKey>
         where TRole : IdentityRole<TKey>
         where TClaim : IdentityUserClaim<TKey>

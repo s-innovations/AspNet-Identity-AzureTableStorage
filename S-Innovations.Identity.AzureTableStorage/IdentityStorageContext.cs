@@ -14,9 +14,10 @@ namespace SInnovations.Identity.AzureTableStorage
 
     public class IdentityTableContext<TUser, TKey, TUserRole, TUserLogin, TUserClaim> : TableStorageContext
         where TUser : IdentityUser<TKey, TUserLogin, TUserRole, TUserClaim>
-        where TUserRole : IdentityRole<TKey>, new()
-        where TUserLogin : IdentityUserLogin<TKey>, new()
-        where TUserClaim : IdentityUserClaim<TKey>, new()
+        where TUserRole : IdentityRole<TKey>
+        where TUserLogin : IdentityUserLogin<TKey>
+        where TUserClaim : IdentityUserClaim<TKey>
+        where TKey : IEquatable<TKey>
     {
 
         public IdentityTableContext(CloudStorageAccount account)
@@ -31,25 +32,24 @@ namespace SInnovations.Identity.AzureTableStorage
                 .HasKeys(u => u.Id, u => "")
                 .WithIndex(u => u.UserName)
                 .WithIndex(u => u.Email)
-                .WithCollectionOf<TUserClaim>(u => u.Claims, (source, user) => (from claim in source where claim.PartitionKey == user.Id.ToString() select claim))
-                .WithCollectionOf<TUserLogin>(u => u.Logins, (source, user) => (from login in source where login.PartitionKey == user.Id.ToString() select login))
-                .WithCollectionOf<TUserRole>(u => u.Roles, (source, user) => (from role in source where role.PartitionKey == user.Id.ToString() select role))
-                .ToTable("AspNetUsers");
+                .WithPropertyOf(u=>u.Claims)
+            .ToTable("AspNetUsers");
 
             modelBuilder.Entity<TUserRole>()
                 .HasKeys(r => r.UserId, r => r.Name)
                 .ToTable("AspNetRoles");
 
             modelBuilder.Entity<TUserLogin>()
+                .UseBase64EncodingFor(ul => ul.ProviderKey)
                 .HasKeys((ul) => ul.UserId,
-                          (ul) => new { ul.LoginProvider, ul.ProviderKey })
+                         (ul) => new { ul.LoginProvider, ul.ProviderKey })
                 //Create and IndexTable to fast lookup based on LoginProvider and ProviderKey
-                .WithIndex(ul => new { ul.LoginProvider, ul.ProviderKey })
+                .WithIndex(ul => new { ul.LoginProvider, ul.ProviderKey })                
                 .ToTable("AspNetUserLogins");
 
             modelBuilder.Entity<TUserClaim>()
                 //Quick lookup based on UserId
-                .HasKeys(c => c.UserId, c => c.Id)
+                .HasKeys(c => c.UserId, c => c.ClaimType)
                 .ToTable("AspNetUserClaims");
 
             base.OnModelCreating(modelBuilder);
@@ -107,6 +107,18 @@ namespace SInnovations.Identity.AzureTableStorage
         public IdentityTableContext(CloudStorageAccount account)
             : base(account)
         {
+
+        }
+        protected override void OnModelCreating(TableStorageModelBuilder modelBuilder)
+        {
+
+            modelBuilder.Entity<TUser>()
+     //         .WithCollectionOf<IdentityUserClaim>(u => u.Claims, (source, user) => (from claim in source where claim.UserId == user.Id select claim))
+              .WithCollectionOf<IdentityUserLogin>(u => u.Logins, (source, user) => (from login in source where login.UserId == user.Id select login))
+              .WithCollectionOf<IdentityRole>(u => u.Roles, (source, user) => (from role in source where role.UserId == user.Id select role));
+
+            base.OnModelCreating(modelBuilder);
+
 
         }
     }

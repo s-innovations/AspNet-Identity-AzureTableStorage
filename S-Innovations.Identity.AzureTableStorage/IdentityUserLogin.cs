@@ -6,7 +6,7 @@ using System.Text;
 
 namespace SInnovations.Identity.AzureTableStorage
 {
-    public class IdentityUserLogin<TKey> : TableEntity
+    public class IdentityUserLogin<TKey> 
     {
     
         // Properties

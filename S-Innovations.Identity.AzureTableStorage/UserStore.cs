@@ -266,7 +266,7 @@ namespace SInnovations.Identity.AzureTableStorage
             }
 
             var local = (from ent in this._context.Roles
-                         where ent.RowKey == roleName
+                         where ent.Name == roleName
                          select ent).Take(1).FirstOrDefault();
                       
             if (local ==null)
@@ -292,7 +292,7 @@ namespace SInnovations.Identity.AzureTableStorage
             }
              List<string> claims = new List<string>();
             var query = (from ent in this._context.Roles
-                        where ent.PartitionKey == user.Id.ToString()
+                        where ent.UserId.ToString() == user.Id.ToString()
                         select ent).AsTableQuery();
 
             TableQuerySegment<TRole> querySegment = null;

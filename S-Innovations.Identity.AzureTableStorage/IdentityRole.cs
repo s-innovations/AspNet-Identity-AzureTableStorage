@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SInnovations.Identity.AzureTableStorage
 {
-    public class IdentityRole<TKey> : TableEntity, IRole<TKey> //where TUserRole : IdentityUserRole<TKey>
+    public class IdentityRole<TKey> : IRole<TKey> //where TUserRole : IdentityUserRole<TKey>
     {
         // Methods
        // public IdentityRole()

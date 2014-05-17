@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.30324.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "S-Innovations.Identity.AzureTableStorage", "S-Innovations.Identity.AzureTableStorage\S-Innovations.Identity.AzureTableStorage.csproj", "{F9394171-AC3E-4145-84F1-C3FE05AFC08B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "S-Innovations.Identity.AzureTableStore", "S-Innovations.Identity.AzureTableStorage\S-Innovations.Identity.AzureTableStore.csproj", "{F9394171-AC3E-4145-84F1-C3FE05AFC08B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{B4912926-BB72-46FC-975F-68B3DE51F9A5}"
 	ProjectSection(SolutionItems) = preProject
@@ -11,6 +11,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{B49129
 		.nuget\NuGet.exe = .nuget\NuGet.exe
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "S-Innovations.IdentityServer.AzureTableStore", "S-Innovations.IdentityServer.AzureTableStore\S-Innovations.IdentityServer.AzureTableStore.csproj", "{FB2C6123-6356-4483-B1D7-60B8E6F6CCA5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.AzureTableStore.Tests", "S-Innovations.IdentityServer.AzureTableStore.Tests\Core.AzureTableStore.Tests.csproj", "{0AD9D375-AC52-4012-B31A-194D80130576}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -22,6 +26,14 @@ Global
 		{F9394171-AC3E-4145-84F1-C3FE05AFC08B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F9394171-AC3E-4145-84F1-C3FE05AFC08B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F9394171-AC3E-4145-84F1-C3FE05AFC08B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB2C6123-6356-4483-B1D7-60B8E6F6CCA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB2C6123-6356-4483-B1D7-60B8E6F6CCA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB2C6123-6356-4483-B1D7-60B8E6F6CCA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB2C6123-6356-4483-B1D7-60B8E6F6CCA5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0AD9D375-AC52-4012-B31A-194D80130576}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0AD9D375-AC52-4012-B31A-194D80130576}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0AD9D375-AC52-4012-B31A-194D80130576}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0AD9D375-AC52-4012-B31A-194D80130576}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
